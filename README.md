@@ -8,8 +8,9 @@ Maksymalny rozmiar to 3 (początkowy rozmiar węża to 1 ), zwiększa się on o 
 Owoce pojawiają się na losowych polach z stałą częstotliwością.  
 Gra kończy się jeśli przy głowie węża nie ma już wolnych pól lub wąż ugryzie się w ogon.  
 W momencie zakończenia gry gracz otrzymuje informacje o zdobytym wyniku a statystyki umieszczane są w bazie danych.  
-Użytkownik ma dostęp do statystyk poprzez ekran Stats. Dane przedstawione są w formie tabeli.
+Użytkownik ma dostęp do statystyk poprzez ekran Stats. Dane przedstawione są w formie tabeli.  
 
+![menuAppearance](Frontend/Images/gameAppearance.png)
 
 ## Tools
 * Python 3.6
