@@ -9,7 +9,7 @@ from Backend.Backend import DbProvider
 class App(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
-        self.database = DbProvider('/Backend/db.sqlite')
+        self.database = DbProvider('D:\\Studia\\PROGRAMOWANIE\\Snake\\Backend\\db.sqlite')
         self.t1 = None
         self.title_font = tkfont.Font(family='Helvetica', size=40, weight="bold", slant="italic")
         self.sizeFlag = False
