@@ -1,8 +1,17 @@
 import sqlite3
 import re
+import os
+import sys
+from time import sleep
 
 
-class DbProvider(object):
+class DbProvider:
+    # path to exe folder
+    def database_path(self, relative):
+        p = os.path.join(os.environ.get("_MEIPASS2", os.path.abspath(".")), relative)
+        print(p)
+        return p
+
     def get_dict(self, headers, rows):  #  Create dict
         dataset = {}
         data = {}
@@ -66,13 +75,18 @@ class DbProvider(object):
         rows = self.cursor.fetchall()
         return self.get_dict(headers, rows)
 
-    def __init__(self, path):
-        self.path = path
+    def __init__(self):
+        self.path = self.database_path('DB\db.sqlite')
         self.dataSet = {}
         # Create database if not exist and get a connection to it
-        # TODO: use absolute path!
+        if not os.path.isfile(self.path):
+            try:
+                os.mkdir(self.database_path("DB"))
+            except:
+                pass
         self.connection = sqlite3.connect(self.path)
-        # Get a cursor to execute sql statements
+
+         # Get a cursor to execute sql statements
         self.cursor = self.connection.cursor()
         # Create tables
         self.game_log = self.GameLog(self)

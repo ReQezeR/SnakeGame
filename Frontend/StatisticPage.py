@@ -3,7 +3,7 @@ from tkinter import font as tkfont
 from tkinter import messagebox
 
 from PIL import Image, ImageTk
-from pandastable import Table, pd  # pandastable v0.22
+from pandastable import Table, pd  # pandas v0.22
 
 """ IMPORTANT
 There's this bug in the latest version of pandas (pandas 0.23) that gives you an error on importing pandas.
@@ -18,13 +18,13 @@ class StatisticPage(tk.Frame):
         self.testColor = "orange"
         self.white = "#FFFFFF"
         self.Table_font = tkfont.Font(family='Helvetica', size=20, weight="bold", slant="italic")
-        self.statisticLabel = ImageTk.PhotoImage(Image.open("Images/StatisticPage/statisticMenuLabel.png"))
-        self.helpMenuButton = ImageTk.PhotoImage(Image.open("Images/MenuPage/helpButtonImage.png"))
-        self.customButtonImage = ImageTk.PhotoImage(Image.open("Images/defaultButtonImage.png"))
+        self.statisticLabel = ImageTk.PhotoImage(Image.open(self.controller.resource_path("StatisticPage/statisticMenuLabel.png")))
+        self.helpMenuButton = ImageTk.PhotoImage(Image.open(self.controller.resource_path("MenuPage/helpButtonImage.png")))
+        self.customButtonImage = ImageTk.PhotoImage(Image.open(self.controller.resource_path("defaultButtonImage.png")))
 
-        self.menuLabelImage = ImageTk.PhotoImage(Image.open("Images/MenuPage/menuLabelImage.png"))
-        self.returnButtonImage = ImageTk.PhotoImage(Image.open("Images/returnButton.png"))
-        self.refreshButtonImage = ImageTk.PhotoImage(Image.open("Images/StatisticPage/refreshButtonImage.png"))
+        self.menuLabelImage = ImageTk.PhotoImage(Image.open(self.controller.resource_path("MenuPage/menuLabelImage.png")))
+        self.returnButtonImage = ImageTk.PhotoImage(Image.open(self.controller.resource_path("returnButton.png")))
+        self.refreshButtonImage = ImageTk.PhotoImage(Image.open(self.controller.resource_path("StatisticPage/refreshButtonImage.png")))
 
     def createMenu(self, parent):
         main_frame = tk.Frame(parent, borderwidth=20, background="#FFFFFF")
@@ -105,7 +105,9 @@ class StatisticPage(tk.Frame):
         tableFrame.pack(fill=tk.BOTH, expand=1)
         df = pd.DataFrame(self.dataSet)  # wczytanie danych
         df = df.transpose()  # transpozycja danych ( zamiana wierszy z kolumnami )
-        df = df[df.columns[set_order(list(self.dataSet[str(0)].keys()))]]  # fix kolejnosci kolumn
+        # TODO: dodac obsluge nazw kolumn przy pustej tabeli
+        if df.keys().__len__() is not 0:
+            df = df[df.columns[set_order(list(self.dataSet[str(0)].keys()))]]  # fix kolejnosci kolumn
 
         if 'Result' in df.columns:
             df['Result'] = df['Result'].astype(int)

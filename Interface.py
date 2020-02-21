@@ -1,15 +1,18 @@
+import os
+import sys
 import tkinter as tk
 from tkinter import font as tkfont
+
+from Backend.Backend import DbProvider
+from Frontend.GamePage import GamePage
 from Frontend.MenuPage import Menu
 from Frontend.StatisticPage import StatisticPage
-from Frontend.GamePage import GamePage
-from Backend.Backend import DbProvider
 
 
 class App(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
-        self.database = DbProvider('D:\\Studia\\PROGRAMOWANIE\\Snake\\Backend\\db.sqlite')
+        self.database = DbProvider()
         self.t1 = None
         self.title_font = tkfont.Font(family='Helvetica', size=40, weight="bold", slant="italic")
         self.sizeFlag = False
@@ -32,6 +35,16 @@ class App(tk.Tk):
         self.t1.kill()
         self.t1.join()
         self.destroy()
+
+    # path to files include in exe
+    def resource_path(self, relative_path):
+        default = "Frontend/Images/"
+        relative_path = default + relative_path
+        try:
+            base_path = sys._MEIPASS
+        except Exception:
+            base_path = os.path.abspath(".")
+        return os.path.join(base_path, relative_path)
 
     def make_window_bigger(self):
         self.geometry('1200x650')
