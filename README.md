@@ -21,7 +21,7 @@ Użytkownik ma dostęp do statystyk poprzez ekran Stats. Dane przedstawione są 
 
 ## How to run
 * Windows
-* run Interface.py
+* run SnakeGame.exe
 
 ## Future improvements
 * Optymalizacja wyświetlania
